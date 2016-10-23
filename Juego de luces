@@ -1,0 +1,91 @@
+/*  
+Deber 1
+Nombre: Tania Paspuel
+Carrera: INGENIERÍA EN ELECTRÓNICA Y REDES DE COMUNICACIÓN
+Materia:Sistemas microprocesados
+Fecaha: 23 de octubre del 2016
+
+Realizar 3 juegos con los 14 pines digitales del arduino
+Juego1: los leds sen encienden en forma ascendente desde la posición 0 y 7 y se apagan de manera descendente 
+
+Juego2: los leds se empiezan a prender al mismo tiempo de forma descendente de la posición 6 a la posición 0 
+        y de manera ascendente de la posición 7 a la posición 13 y se apagan en el mismo orden en que se prendieron.
+        
+Juego3: se encienden los tres leds del principio y del final y luego se encienden los leds del centro  y luego se 
+        apagan en el mismo orden ..
+   
+ */
+int i=0; //inicia el contador i
+int j=0; //inicia el contador j para poder prender dos leds al mismo tiempo
+int leds[14]={0,1,2,3,4,5,6,7,8,9,10,11,12,13}; //vector de 14 posiciones 
+
+void setup() {// Declaramos los 14 pines digitales del arduino uno
+  pinMode (0,OUTPUT);
+  pinMode (1,OUTPUT);
+  pinMode (2,OUTPUT);
+  pinMode (3,OUTPUT);
+  pinMode (4,OUTPUT);
+  pinMode (5,OUTPUT);
+  pinMode (6,OUTPUT);
+  pinMode (7,OUTPUT);
+  pinMode (8,OUTPUT);
+  pinMode (9,OUTPUT);
+  pinMode (10,OUTPUT);
+  pinMode (11,OUTPUT);
+  pinMode (12,OUTPUT);
+  pinMode (13,OUTPUT);
+}
+
+void juego1(){//codigo del juego1
+  for(i=7;i<14;i++){//los leds se encienden en forma ascendente desde la posicion 7 hasta la posicion 14.
+  digitalWrite(leds[i],HIGH);
+  delay(100);  
+  }
+  for(i=0;i<7;i++){//los leds se encienden en forma ascendente desde la posicion 0 hasta la posicion 6.
+  digitalWrite(leds[i],HIGH);
+  delay(100);  
+  }
+  for(i=6;i>=0;i--){//los leds se apagan en forma descendente desde la posicion 6 hasta la posicion 0.
+  digitalWrite(leds[i],LOW); 
+  delay(50);  
+  }
+  for(i=14;i>=7;i--){//los leds se apagan en forma descendente desde la posicion 14 hasta la posicion 7.
+  digitalWrite(leds[i],LOW); 
+  delay(50);  
+  } }
+  
+void juego2(){//codigo del juego2
+   for(i=6,j=7;i>=0,j<=13;i--,j++){//se enciende al mismo tiempo desde el centro
+  digitalWrite(leds[i],HIGH),digitalWrite(leds[j],HIGH);
+  delay(300);}
+  for(i=6,j=7;i>=0,j<=13;i--,j++){// se apagan al mismo tiempo desde el centro
+  digitalWrite(leds[i],LOW),digitalWrite(leds[j],LOW);
+  delay(400);}}
+  
+void juego3(){//Codigo del juego3  
+  for(i=2,j=11;i>=0,j<=13;i--,j++){//se enciende los tres leds de los dos extremos
+  digitalWrite(leds[i],HIGH),digitalWrite(leds[j],HIGH);
+  delay(200);  
+  }
+   for(i=6,j=7;i>=2,j<=10;i--,j++){//se enciende los leds del centro 
+  digitalWrite(leds[i],HIGH),digitalWrite(leds[j],HIGH);
+  delay(200);  
+  }
+  for(i=2,j=11;i>=0,j<=13;i--,j++){//se apagan los tres leds de los dos extremos
+  digitalWrite(leds[i],LOW),digitalWrite(leds[j],LOW);
+  delay(100);  
+  }
+  for(i=6,j=7;i>=2,j<=10;i--,j++){//se eapagan los leds del centro 
+  digitalWrite(leds[i],LOW),digitalWrite(leds[j],LOW);
+  delay(100);  
+  } 
+  }
+  
+void loop() {
+  juego1();// se llama al codigo del juego1
+  delay(300);// Pausa entre el juego1 y el juego2
+  juego2();// se llama al codigo del juego2
+  delay(300); // Pausa entre el juego2 y el juego3
+  juego3();// se llama al codigo del juego3
+  delay(300);// Pausa entre el juego3 y el juego1
+}
