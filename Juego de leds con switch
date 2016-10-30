@@ -1,0 +1,140 @@
+/*  
+Deber 2
+Nombre: Tania Paspuel
+Carrera: INGENIERÍA EN ELECTRÓNICA Y REDES DE COMUNICACIÓN
+Materia:Sistemas microprocesados
+Fecaha: 30 de octubre del 2016
+
+Al momento de colocar los siguientes valores en el sw debe relizar la funcion asignada
+
+Numero    sw1	       sw2             Funcion
+ 1         0		1              Se debeseleccionar un numero aleatoria de los numeros pares se debe repetir 5 veces esta funcion ( Random)
+ 2         1		0              Se debe Prender los numeros pares del 1-6 (2,4,6)
+ 3         1		1              Se debe Prender los numeros impares del 1-6 (1,3,5)
+ 4         0		0              Se debeeelegir aleatoriamente (random ) las combinaciones(6,1)(5,2)(4,3)(3,8)
+   
+ */
+
+//Declaracion de las variables
+int led_1=8;
+int led_2=9;
+int led_3=10;
+int led_4=11;
+int led_5=12;
+int led_6=13;
+int sw_1=7;
+int sw_2=6;
+int pulsador=5;
+int vector_leds[6]={led_1,led_2,led_3,led_4,led_5,led_6};
+
+int contador=0;
+int cont=0;
+int conta=0;
+
+
+void setup() {
+  pinMode(led_1,OUTPUT);//pin 13 como salida
+  pinMode(led_2,OUTPUT);//pin 12 como salida
+  pinMode(led_3,OUTPUT);//pin 11 como salida
+  pinMode(led_4,OUTPUT);//pin 10 como salida
+  pinMode(led_5,OUTPUT);//pin 9 como salida
+  pinMode(led_6,OUTPUT); //pin 8 como salida
+  pinMode(sw_1,INPUT);//pin 7 como entrada
+  pinMode(sw_2,INPUT);//pin 6 como entrada
+  pinMode(pulsador,INPUT);//pin 5 como entrada
+}
+void loop() {
+
+  
+  
+//Fucion 1 codigo
+  {
+   if(digitalRead (sw_1)==LOW&&digitalRead(sw_2)==HIGH)//condicion para que funcione
+   // se inicializa en 1 para que se vayan prendiendo los numeros pares
+   contador=1;
+   cont=1;
+    {
+     contador=random(6);//escoge al azar un numero par de los 6
+     for(;cont<2;cont++)//numero de veces que se repite 
+     {
+      if(contador==1||contador==3||contador==5)
+      {
+        //permite que el led  se prenda y se apague y continue al siguiente led 
+        digitalWrite(vector_leds[contador],HIGH);//se prenden los leds
+        delay(200);
+        digitalWrite(vector_leds[contador],LOW);//se apagan los leds
+        delay(200);
+      }
+     }contador=0;
+    }
+  }
+  
+    contador=0;
+    cont=0;
+    //Funcion 2 codigo
+  {
+    
+   if(digitalRead (sw_1)==HIGH&&digitalRead(sw_2)==LOW)//condicion para que funcione
+    {
+     for(;cont<2;cont++)
+     {
+       for(contador=1;contador<6;contador=contador+2)
+      {
+      //permite que el led  se prenda y se apague y continue al siguiente led 
+          digitalWrite (vector_leds[contador],HIGH);//se prenden los leds
+          delay(200);
+          digitalWrite(vector_leds[contador],LOW);//se apagan los leds
+          delay(200);
+      }contador=0;
+     }
+    }
+  }
+  
+   contador=0;
+   cont=0;
+    //Funcion 3 codigo
+ {
+   if(digitalRead (sw_1)==HIGH&&digitalRead(sw_2)==HIGH)//condicion para que funcione
+   {
+     for(;cont<2;cont++)
+       {
+         for(contador=0;contador<6;contador=contador+2)
+         {
+           //permite que el led  se prenda y se apague y continue al siguiente led 
+           digitalWrite (vector_leds[contador],HIGH);//se prenden los leds
+           delay(200);
+           digitalWrite(vector_leds[contador],LOW);//se apagan los leds
+           delay(200);
+         }contador=0;
+       }
+    }
+  }
+  
+  
+  contador=0;
+  conta=0;
+  
+  //Funcion 4 codigo
+  {
+    if(digitalRead (sw_1)==LOW&&digitalRead(sw_2)==LOW)//condicion para que funcione
+    {
+         for(;cont<2;cont++)
+         {
+         for(contador=0,conta=5;contador<=2,conta>=3;contador=contador+2,conta=conta+2)
+         {   
+           //permite que un par de leds  se prendan y se apaguen y continue al siguiente par de leds
+           digitalWrite(vector_leds[contador],HIGH),digitalWrite(vector_leds[conta],HIGH);//se prenden los leds
+           delay(200);
+           digitalWrite(vector_leds[contador],LOW),digitalWrite(vector_leds[conta],LOW); //se apagan los leds  
+           delay(200);
+         }contador=0;cont=0;conta=0;
+    }}}
+  
+}
+
+
+
+
+
+
+
