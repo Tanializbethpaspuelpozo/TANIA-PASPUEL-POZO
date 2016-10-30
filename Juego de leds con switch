@@ -128,7 +128,9 @@ void loop() {
            digitalWrite(vector_leds[contador],LOW),digitalWrite(vector_leds[conta],LOW); //se apagan los leds  
            delay(200);
          }contador=0;cont=0;conta=0;
-    }}}
+       }
+      }
+   }
   
 }
 
