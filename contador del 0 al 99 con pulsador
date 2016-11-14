@@ -1,0 +1,169 @@
+//Deber 3
+//Nombre: Tania Paspuel
+//Carrera: INGENIERÍA EN ELECTRÓNICA Y REDES DE COMUNICACIÓN
+//Materia:Sistemas microprocesados
+//Fecaha: 14 de Noviembre del 2016
+// contador del 0 a 99 con pulsador
+
+
+
+//declaracion de variables
+int A=13;
+int B=12;
+int C=11;
+int D=10;
+int contador=0;
+int pulsador=7;
+int unidades=9;
+int decenas=8;
+int contador_unidades;
+int contador_decenas;
+
+void setup() {
+  // put your setup code here, to run once:
+  
+  // declaracion puertos de entrada
+  
+pinMode (A,OUTPUT);
+pinMode (B,OUTPUT);
+pinMode (C,OUTPUT);
+pinMode (D,OUTPUT);
+pinMode (unidades,OUTPUT);
+pinMode (decenas,OUTPUT);
+pinMode (pulsador,INPUT);
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  // codigo para que funcione el pulsador
+if(digitalRead (pulsador)==HIGH)
+{
+  if(contador<99)
+    { 
+    contador ++;
+    if (contador<10)
+      {
+      //unidades
+      digitalWrite (unidades,HIGH);
+      digitalWrite(decenas,LOW);
+      disp (contador);
+      delay(100);
+      }
+    else
+    {
+      // decenas
+      contador_decenas=contador/10;
+      digitalWrite (unidades,LOW);
+      digitalWrite(decenas,HIGH);
+      disp (contador_decenas);
+      delay(50);
+      contador_unidades=contador-(contador_decenas*10);
+      digitalWrite (unidades,HIGH);
+      digitalWrite(decenas,LOW);
+      disp (contador_unidades);
+      delay(50);
+       delay(200);
+    }
+    
+  }
+// contador regresa a cero
+else
+contador=0;
+}
+} 
+void disp (int numero)
+{
+     switch(numero)
+    {
+// numero 0 en binario 0000
+    case 0:
+digitalWrite(A,LOW);
+digitalWrite(B,LOW);
+digitalWrite(C,LOW);
+digitalWrite(D,LOW);
+delay (100);
+    break; 
+
+// numero 1 en binario 0001    
+    case 1:
+digitalWrite(A,HIGH);
+digitalWrite(B,LOW);
+digitalWrite(C,LOW);
+digitalWrite(D,LOW);
+delay (100);
+    break; 
+ 
+ // numero 2 en binario 0010   
+     case 2:
+digitalWrite(A,LOW);
+digitalWrite(B,HIGH);
+digitalWrite(C,LOW);
+digitalWrite(D,LOW);
+delay (100);
+    break; 
+  
+// numero 3 en binario 0011
+    case 3:
+digitalWrite(A,HIGH);
+digitalWrite(B,HIGH);
+digitalWrite(C,LOW);
+digitalWrite(D,LOW);
+delay (100);
+    break; 
+
+// numero 4 en binario 0100    
+    case 4:
+digitalWrite(A,LOW);
+digitalWrite(B,LOW);
+digitalWrite(C,HIGH);
+digitalWrite(D,LOW);
+delay (100);
+    break; 
+ 
+// numero 5 en binario 0101   
+    case 5:
+digitalWrite(A,HIGH);
+digitalWrite(B,LOW);
+digitalWrite(C,HIGH);
+digitalWrite(D,LOW);
+delay (100);
+    break; 
+
+// numero 6 en binario 0110  
+     case 6: 
+digitalWrite(A,LOW);
+digitalWrite(B,HIGH);
+digitalWrite(C,HIGH);
+digitalWrite(D,LOW);
+delay (100);
+    break; 
+
+// numero 7 en binario 0111      
+   case 7:
+digitalWrite(A,HIGH);
+digitalWrite(B,HIGH);
+digitalWrite(C,HIGH);
+digitalWrite(D,LOW);
+delay (100);
+    break; 
+
+// numero 8 en binario 1000  
+     case 8:
+digitalWrite(A,LOW);
+digitalWrite(B,LOW);
+digitalWrite(C,LOW);
+digitalWrite(D,HIGH);
+delay (100);
+    break; 
+ 
+// numero 9 en binario 1001    
+    case 9:
+digitalWrite(A,HIGH);
+digitalWrite(B,LOW);
+digitalWrite(C,LOW);
+digitalWrite(D,HIGH);
+delay (100);
+    break; 
+    }
+}
