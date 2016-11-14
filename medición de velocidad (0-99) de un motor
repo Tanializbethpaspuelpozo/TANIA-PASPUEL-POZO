@@ -1,0 +1,147 @@
+//  Deber 3
+//Nombre: Tania Paspuel
+//Carrera: INGENIERÍA EN ELECTRÓNICA Y REDES DE COMUNICACIÓN
+//Materia:Sistemas microprocesados
+//Fecaha: 14 de Noviembre del 2016
+//medición de velocidad (0-99) de un motor
+
+
+//declaracion de las variables
+int A = 13;
+int B = 12;
+int C = 11;
+int D = 10;
+int motor = 9;
+int valor;
+int unidades = 8;
+int decenas = 7;
+int contador_decena = 0;
+int contador_unidad = 0;
+void setup() {
+  // put your setup code here, to run once:
+  // puertos de salida
+  pinMode(motor, OUTPUT);
+  pinMode (A, OUTPUT);
+  pinMode (B, OUTPUT);
+  pinMode (C, OUTPUT);
+  pinMode (D, OUTPUT);
+  pinMode (unidades, OUTPUT);
+  pinMode (decenas, OUTPUT);
+}
+void loop() {
+//velocidad del motor
+  // lee la señal
+  valor = analogRead(0);                         
+  analogWrite(motor,valor/4);                     
+  delay(50);              
+  
+// CConversion de 0-1023 a 0-99  
+  valor = map (valor, 0, 1023, 0, 100);      
+  contador_decena = valor/ 10;                      
+  contador_unidad = valor - (contador_decena * 10);  
+  
+// para que salga en el display   
+  digitalWrite(unidades, HIGH);                      
+  digitalWrite(decenas, LOW);                         
+  dis(contador_unidad);                                   
+  delay(50);       
+  
+  digitalWrite(unidades, LOW);                        
+  digitalWrite(decenas, HIGH);                        
+  dis(contador_decena);                                   
+  delay(50);                                         
+}
+void dis (int numero) {                               
+  switch (numero) {
+// se prenden los segmentos    
+   // numero 0 en binario 0000
+    case 0:
+digitalWrite(A,LOW);
+digitalWrite(B,LOW);
+digitalWrite(C,LOW);
+digitalWrite(D,LOW);
+delay (100);
+    break; 
+
+// numero 1 en binario 0001    
+    case 1:
+digitalWrite(A,HIGH);
+digitalWrite(B,LOW);
+digitalWrite(C,LOW);
+digitalWrite(D,LOW);
+delay (100);
+    break; 
+ 
+ // numero 2 en binario 0010   
+     case 2:
+digitalWrite(A,LOW);
+digitalWrite(B,HIGH);
+digitalWrite(C,LOW);
+digitalWrite(D,LOW);
+delay (100);
+    break; 
+  
+// numero 3 en binario 0011
+    case 3:
+digitalWrite(A,HIGH);
+digitalWrite(B,HIGH);
+digitalWrite(C,LOW);
+digitalWrite(D,LOW);
+delay (100);
+    break; 
+
+// numero 4 en binario 0100    
+    case 4:
+digitalWrite(A,LOW);
+digitalWrite(B,LOW);
+digitalWrite(C,HIGH);
+digitalWrite(D,LOW);
+delay (100);
+    break; 
+ 
+// numero 5 en binario 0101   
+    case 5:
+digitalWrite(A,HIGH);
+digitalWrite(B,LOW);
+digitalWrite(C,HIGH);
+digitalWrite(D,LOW);
+delay (100);
+    break; 
+
+// numero 6 en binario 0110  
+     case 6: 
+digitalWrite(A,LOW);
+digitalWrite(B,HIGH);
+digitalWrite(C,HIGH);
+digitalWrite(D,LOW);
+delay (100);
+    break; 
+
+// numero 7 en binario 0111      
+   case 7:
+digitalWrite(A,HIGH);
+digitalWrite(B,HIGH);
+digitalWrite(C,HIGH);
+digitalWrite(D,LOW);
+delay (100);
+    break; 
+
+// numero 8 en binario 1000  
+     case 8:
+digitalWrite(A,LOW);
+digitalWrite(B,LOW);
+digitalWrite(C,LOW);
+digitalWrite(D,HIGH);
+delay (100);
+    break; 
+ 
+// numero 9 en binario 1001    
+    case 9:
+digitalWrite(A,HIGH);
+digitalWrite(B,LOW);
+digitalWrite(C,LOW);
+digitalWrite(D,HIGH);
+delay (100);
+    break; 
+  }
+}
