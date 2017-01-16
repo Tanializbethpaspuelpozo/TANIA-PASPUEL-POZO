@@ -1,0 +1,38 @@
+#include <LiquidCrystal.h> 
+LiquidCrystal lcd (8, 9, 10, 11, 12, 13); 
+String dato; 
+int tamano; 
+int i = 0; 
+int j = 1; 
+void setup() { 
+  lcd.begin(16, 2); 
+  Serial.begin(9600); 
+}  
+void loop() 
+// todo este codigo se va a estar repitiendo  
+{ 
+  Serial.println("Juego de palabras "); 
+  lcd.setCursor(0,1); 
+  Serial.println("Escriba la palabra "); 
+  delay(1000); 
+  dato = Serial.readString(); 
+  tamano = dato.length(); 
+  char vector[tamano + 1]; 
+  dato.toCharArray(vector, tamano + 1); 
+// escribe la palabra 
+  for (; i < tamano; i++) { 
+    j = 1 - j; 
+    lcd.setCursor(i, j); 
+    lcd.print(vector[i]); 
+    delay(200); 
+  } 
+  // borra lo que esta escrito 
+  i=16; 
+  j = 1; 
+  for (; i >= 0; i--) { 
+    j = 1 - j; 
+    lcd.setCursor(i, j); 
+    lcd.print(' '); 
+    delay(100); 
+  } 
+}    
