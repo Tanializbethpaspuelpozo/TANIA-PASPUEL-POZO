@@ -1,38 +1,63 @@
-#include <LiquidCrystal.h> 
-LiquidCrystal lcd (8, 9, 10, 11, 12, 13); 
-String dato; 
-int tamano; 
-int i = 0; 
-int j = 1; 
-void setup() { 
-  lcd.begin(16, 2); 
-  Serial.begin(9600); 
-}  
-void loop() 
-// todo este codigo se va a estar repitiendo  
-{ 
-  Serial.println("Juego de palabras "); 
-  lcd.setCursor(0,1); 
-  Serial.println("Escriba la palabra "); 
-  delay(1000); 
-  dato = Serial.readString(); 
-  tamano = dato.length(); 
-  char vector[tamano + 1]; 
-  dato.toCharArray(vector, tamano + 1); 
-// escribe la palabra 
-  for (; i < tamano; i++) { 
-    j = 1 - j; 
-    lcd.setCursor(i, j); 
-    lcd.print(vector[i]); 
-    delay(200); 
-  } 
-  // borra lo que esta escrito 
-  i=16; 
-  j = 1; 
-  for (; i >= 0; i--) { 
-    j = 1 - j; 
-    lcd.setCursor(i, j); 
-    lcd.print(' '); 
-    delay(100); 
-  } 
-}    
+#include <LiquidCrystal.h>
+LiquidCrystal lcd (8, 9, 10, 11, 12, 13);
+
+char nombre1[11]={'*','J','*','U','*','E','*','G','*','O','1'};
+char nombre2[11]={'J','*','U','*','E','*','G','*','O','*','2'};
+char nombre3[11]={'J','U','E','G','O','.','.','.','.','.','3'};
+int i=0;//genera el recorrido
+int j=0;
+String datos;
+
+
+void setup() {
+lcd.begin(16,2);
+Serial.begin(9600);
+
+  
+lcd.print("Ingrese el numero");
+  lcd.setCursor(0,1);
+  lcd.print("de un juego");
+  delay (700);
+   lcd.clear();
+   
+}
+
+void loop() {
+
+delay (400);
+juego1();// se llama al codigo del juego1
+delay (400);
+juego2();// se llama al codigo del juego1
+delay (400);
+juego3();// se llama al codigo del juego1
+delay (400);}
+
+
+
+
+void juego1(){
+if (Serial.available()>0)//puerto recibe dato
+{
+  if(Serial.read()=='1') //si recibimos letra A
+  {
+ for(; i<11;i++){// escriba y bore saltando una
+ j=1-j;
+  lcd.setCursor(i,j);
+  lcd.print (nombre1[i]);//imprime en la variable q esta corriendo
+  delay(200);
+  }
+  j=1;
+for(;i>0;i--){
+  j=1-j;
+  lcd.setCursor(i,j);
+  lcd.print (' ');//imprime en la variable q esta corriendo
+  delay(200);
+  }
+i=0;  
+}
+
+  }
+  else
+  {
+    lcd.print("Ingrese otro");
+  lcd.setCursor(0,1);
